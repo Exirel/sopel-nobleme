@@ -1,0 +1,9 @@
+include README.md
+include MANIFEST.in
+include LICENSE
+include setup.cfg
+recursive-include sopel_nobleme *.py
+recursive-include sopel_modules *.py
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude tests *
