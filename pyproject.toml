@@ -1,0 +1,92 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+platforms = ["Linux x86, x86-64"]
+
+[tool.setuptools.packages.find]
+include = ["sopel_nobleme", "sopel_nobleme.*"]
+namespaces = false
+
+[project]
+name = "sopel-nobleme"
+version = "0.2.0.dev0"
+description = "A Sopel plugin for the Nobleme.com silly community"
+keywords = [
+  "sopel",
+  "plugin",
+  "http",
+  "bot",
+  "irc",
+]
+maintainers = [
+  { name="Florian Strzelecki", email="florian.strzelecki@gmail.com" },
+]
+authors = [
+    { name="Florian Strzelecki", email="florian.strzelecki@gmail.com" },
+]
+
+readme = "README.md"
+license = "MPL-2.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Communications :: Chat :: Internet Relay Chat",
+]
+requires-python = ">=3.12, <4"
+dependencies = [
+    "sopel>=8.0",
+    "requests",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Exirel/sopel-nobleme"
+"Bug Tracker" = "https://github.com/Exirel/sopel-nobleme/issues"
+
+[project.entry-points."sopel.plugins"]
+nobleme = "sopel_nobleme.plugin"
+
+[dependency-groups]
+dev = [ # These are requirements to develop the plugin itself.
+    {include-group = "lint"},
+    {include-group = "test"},
+]
+lint = [
+    "flake8",
+    "flake8-pyproject",
+    "pylint",
+    "coverage",
+    "coverage[toml]",
+    "pyroma",
+    "mypy",
+    "types-requests",
+]
+test = [
+    "pytest",
+]
+
+[tool.flake8]
+max-line-length = 79
+
+[tool.isort]
+line_length = 79
+known_third_party = ["sopel"]
+known_first_party = ["sopel_nobleme"]
+
+[tool.pytest.ini_options]
+python_files = "*.py"
+addopts = "--tb=short -p no:nose"
+markers = [
+    "vcr",
+    "online",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["sopel_nobleme"]
